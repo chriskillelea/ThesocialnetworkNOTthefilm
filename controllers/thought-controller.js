@@ -1,6 +1,6 @@
-const { User, Thought} = require('../models');
+      const { User, Thought} = require('../models');
 
-const thoughtController = {
+      const thoughtController = {
  
 
  getAllThought(req, res) {
@@ -38,7 +38,7 @@ const thoughtController = {
         res.sendStatus(400);
       });
   },
-createThought({ body }, res) {
+    createThought({ body }, res) {
     Thought.create(body)
         .then(({ _id }) => {
             return User.findOneAndUpdate(
@@ -56,7 +56,7 @@ createThought({ body }, res) {
         })
         .catch(err => res.json(err));
 },
-  updateThought({ params, body }, res) {
+    updateThought({ params, body }, res) {
     Thought.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
@@ -67,7 +67,7 @@ createThought({ body }, res) {
       })
       .catch(err => res.json(err));
   },
-  deleteThought({ params }, res) {
+     deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.id })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
@@ -106,7 +106,7 @@ createReaction({params, body}, res) {
     })
     .catch(err => res.status(400).json(err))
 },
-deleteReaction({ params }, res) {
+    deleteReaction({ params }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $pull: { reactions: { reactionId: params.reactionId } } },
